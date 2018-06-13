@@ -1,0 +1,22 @@
+.shopping-cart-info {
+  border-collapse: collapse;
+  margin-left: 15px;
+
+  &__row {
+    line-height: 25px;
+  }
+
+  &__title,
+  &__text {
+    text-align: left;
+    font-size: 14px;
+  }
+
+  &__title {
+    font-weight: 400;
+  }
+
+  &__text {
+    padding-right: 10px;
+  }
+}
