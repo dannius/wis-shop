@@ -3,12 +3,14 @@ export class Product {
   public title: string;
   public price: number;
   public image: string;
+  public ammount: number;
 
-  constructor(data: any = {}) {
-    this.id = +data.id || null;
-    this.title = data.title;
-    this.price = data.price;
-    this.image = data.image;
+  constructor(row: any = {}) {
+    this.id = +row.id || null;
+    this.title = row.title || '';
+    this.price = row.price || null;
+    this.image = row.image || '';
+    this.ammount = row.ammount || null;
   }
 }
 

@@ -1,4 +1,4 @@
-<form [formGroup]="ammountForm" class="product-dialog">
+<form [formGroup]="ammountForm" class="product-dialog" (ngSubmit)="submit()">
   <div class="product-dialog__content">
     <img class="product__image_sm" mat-card-image [src]="product.image | base64Image">
     <div class="product-dialog__info">

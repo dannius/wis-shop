@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Product } from '@app/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,18 +13,23 @@ export class ProductDialogComponent implements OnInit {
   public ammountForm: FormGroup;
   public totalPrice: number;
 
+  private snackbarConfig = {
+    duration: 2500
+  };
+
   constructor(
-    public dialogRef: MatDialogRef<ProductDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any,
-    private builder: FormBuilder
+    private _dialogRef: MatDialogRef<ProductDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private _data: any,
+    private _builder: FormBuilder,
+    private _snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
-    this.product = this.data.product;
+    this.product = this._data.product;
     this.totalPrice = this.product.price;
 
-    this.ammountForm = this.builder.group({
-      ammount: [1, Validators.min(1)],
+    this.ammountForm = this._builder.group({
+      ammount: [1, Validators.min(1)]
     });
 
     this.ammountForm
@@ -33,6 +38,18 @@ export class ProductDialogComponent implements OnInit {
       .subscribe((num) => {
         this.totalPrice = num > 0 ? this.product.price * num : 0;
       });
+  }
+
+  public closeModal() {
+    this._dialogRef.close();
+  }
+
+  public submit() {
+    this.closeModal();
+    this._snackbar.open(`Товар "${this.product.title}" добавлен в корзину`, '', this.snackbarConfig);
+
+    // send to server
+    this.product.ammount = this.ammountForm.value;
   }
 
 }
