@@ -1,17 +1,17 @@
 <div class="header">
   <mat-toolbar color="primary">
     <mat-toolbar-row class="container header__content">
-      <a mat-button>
+      <a mat-button [routerLink]="['/']">
         <mat-icon>home</mat-icon>
       </a>
       <div class="header__control">
-        <a mat-button class="header__control-btn" href="">
+        <a mat-button class="header__control-btn" [routerLink]="['wish-cart']">
           <mat-icon>bookmarks</mat-icon>
           <div class="shopping-cart-info">
             <span class="shopping-cart-info__text">n товаров</span>
           </div>
         </a>
-        <a mat-button class="header__control-btn" href="">
+        <a mat-button class="header__control-btn" [routerLink]="['shopping-cart']">
           <mat-icon>shopping_cart</mat-icon>
           <app-shopping-cart-info></app-shopping-cart-info>
         </a>
