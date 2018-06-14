@@ -1,4 +1,3 @@
-import { ProductListResolver } from '@app/components/main-shop/product-list.resolver';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,12 +6,16 @@ import { AppComponent } from '@app/app.component';
 import { routes } from '@app/app.routes';
 import { HeaderComponent } from '@app/components/header/header.component';
 import { MainShopComponent } from '@app/components/main-shop/main-shop.component';
+import { ProductListResolver } from '@app/components/main-shop/product-list.resolver';
+import { ProductItemComponent } from '@app/components/products/item/item.component';
+import { ProductListComponent } from '@app/components/products/list/list.component';
 import { ShoppingCartInfoComponent } from '@app/components/shopping-cart-info/shopping-cart-info.component';
 import { ShoppingCartComponent } from '@app/components/shopping-cart/shopping-cart.component';
 import { WishCartComponent } from '@app/components/wish-cart/wish-cart.component';
 import { CoreModule } from '@app/core/core.module';
 import { MaterialModule } from '@app/material.module';
 import { ProductService } from '@app/services/product.service';
+import { Base64ImagePipe, PricePipe } from '@app/shared/pipes';
 
 
 @NgModule({
@@ -22,7 +25,13 @@ import { ProductService } from '@app/services/product.service';
     ShoppingCartInfoComponent,
     MainShopComponent,
     WishCartComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ProductListComponent,
+    ProductItemComponent,
+
+    // PIPES
+    Base64ImagePipe,
+    PricePipe
   ],
   imports: [
     BrowserModule,

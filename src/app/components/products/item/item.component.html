@@ -1,0 +1,13 @@
+<mat-card class="product">
+  <img class="product__image" mat-card-image [src]="product.image | base64Image">
+  <h3 class="product__title product__title_lg">{{product.title}}</h3>
+  <h4 class="product__title product__title_md">{{product.price | price}} р.</h4>
+  <mat-card-actions class="product__controls">
+    <button color="warn" mat-button>
+      <mat-icon>bookmarks</mat-icon>
+    </button>
+    <button color="primary" mat-raised-button>
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

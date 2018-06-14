@@ -1,0 +1,33 @@
+.product {
+  display: inline-flex !important;
+  flex-direction: column;
+  margin: 10px;
+  width: 220px;
+
+  &__image {
+    max-width: 200px;
+    width: 200px;
+    margin: 0 auto 10px !important;
+  }
+
+  &__title {
+    text-align: center;
+
+    &_lg {
+      margin: 0;
+      font-weight: 300;
+      font-size: 20px;
+    }
+
+    &_md {
+      margin: 5px 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  &__controls {
+    display: flex !important;
+    justify-content: space-around;
+  }
+}
