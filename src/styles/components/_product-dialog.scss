@@ -1,0 +1,16 @@
+.product-dialog {
+  &__content {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  &__submit-btn {
+    margin-top: 15px !important;
+  }
+
+  &__info {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+}

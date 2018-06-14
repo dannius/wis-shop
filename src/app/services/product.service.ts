@@ -19,7 +19,7 @@ constructor(
       .get(`${environment.apiUrl}/products.json`)
       .map((products: any) => {
         return Observable.of(
-          products.map((product) => Product.fromJson(product))
+          products.map((product) => new Product(product))
         );
       })
       .catch((err) => Observable.of(err));

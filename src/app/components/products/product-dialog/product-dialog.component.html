@@ -1,0 +1,16 @@
+<form [formGroup]="ammountForm" class="product-dialog">
+  <div class="product-dialog__content">
+    <img class="product__image_sm" mat-card-image [src]="product.image | base64Image">
+    <div class="product-dialog__info">
+      <h3 class="product__title_lg">{{product.title}}</h3>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Количество" formControlName="ammount" min="1">
+        <mat-error *ngIf="ammountForm.get('ammount')?.invalid">Недоступное количество</mat-error>
+      </mat-form-field>
+      <span class="product-dialog__total-price text-bold">Сумма: {{totalPrice | price}} р.</span>
+    </div>
+  </div>
+  <button color="primary" mat-raised-button class="product-dialog__submit-btn">
+    <mat-icon>add</mat-icon> добавить в корзину
+  </button>
+</form>

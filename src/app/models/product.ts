@@ -1,13 +1,14 @@
 export class Product {
+  public id: number;
+  public title: string;
+  public price: number;
+  public image: string;
 
-  public static fromJson({ id, title, price, image }) {
-    return new Product(+id, title, price, image);
+  constructor(data: any = {}) {
+    this.id = +data.id || null;
+    this.title = data.title;
+    this.price = data.price;
+    this.image = data.image;
   }
-
-  constructor(
-    public id: number,
-    public title: string,
-    public price: number,
-    public image: string
-  ) { }
 }
+
