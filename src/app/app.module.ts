@@ -1,3 +1,4 @@
+import { ProductListResolver } from '@app/components/main-shop/product-list.resolver';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +12,7 @@ import { ShoppingCartComponent } from '@app/components/shopping-cart/shopping-ca
 import { WishCartComponent } from '@app/components/wish-cart/wish-cart.component';
 import { CoreModule } from '@app/core/core.module';
 import { MaterialModule } from '@app/material.module';
+import { ProductService } from '@app/services/product.service';
 
 
 @NgModule({
@@ -29,7 +31,12 @@ import { MaterialModule } from '@app/material.module';
     MaterialModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    ProductService,
+
+    // RESOLVERS
+    ProductListResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
