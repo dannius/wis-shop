@@ -20,6 +20,7 @@ import { CoreModule } from '@app/core/core.module';
 import { MaterialModule } from '@app/material.module';
 import { ProductService } from '@app/services/product.service';
 import { Base64ImagePipe, PricePipe } from '@app/shared/pipes';
+import { WishCartService } from '@app/services/wish-cart.service';
 
 
 
@@ -52,6 +53,7 @@ import { Base64ImagePipe, PricePipe } from '@app/shared/pipes';
   providers: [
     ProductService,
     ShoppingCartService,
+    WishCartService,
 
     // RESOLVERS
     ProductListResolver

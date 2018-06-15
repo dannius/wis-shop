@@ -16,7 +16,7 @@ export class MainShopComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.products = this.route.snapshot.data.productList.value;
+    this.products = this.route.snapshot.data.productList;
   }
 
 }

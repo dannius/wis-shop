@@ -8,7 +8,7 @@
         <a mat-button class="header__control-btn" [routerLink]="['wish-cart']">
           <mat-icon>bookmarks</mat-icon>
           <div class="shopping-cart-info">
-            <span class="shopping-cart-info__text">n товаров</span>
+            <span class="shopping-cart-info__text">{{ getWishTitle() }}</span>
           </div>
         </a>
         <a mat-button class="header__control-btn" [routerLink]="['shopping-cart']">
