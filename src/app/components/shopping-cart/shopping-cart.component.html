@@ -1,5 +1,46 @@
 <div class="container" *ngIf="cartProducts?.length; else emptyListTitle">
-  <app-product-list [products]="cartProducts"></app-product-list>
+  <form [formGroup]="form" class="shopping-cart__form" (ngSubmit)="submit()">
+    <div 
+      *ngFor="let product of form.get('products').controls; let i=index"
+      formArrayName="products"
+      class="shoppling-cart__list"
+    >
+      <mat-card
+        [formGroupName]="i"
+        [ngClass]="{'shopping-cart__item_selected': form.get('products').controls[i].get('selected').value}"
+        class="shopping-cart__item">
+        <img class="shopping-cart__item-image" mat-card-image [src]="cartProducts[i].image | base64Image">
+        <mat-card-content>
+          <h3 class="product__title product__title_lg">{{cartProducts[i].title}}</h3>
+          <div>
+            <mat-checkbox formControlName="selected">Выбрать</mat-checkbox>
+          </div>
+          <mat-form-field>
+            <input matInput type="number" placeholder="Количество" formControlName="ammount" min="1">
+          </mat-form-field>
+          <h4 class="product__title product__title_md">
+            {{cartProducts[i].price * form.get('products').controls[i].get('ammount').value | price}} р.
+          </h4>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <mat-card class="shopping-cart__contact" formGroupName="contactForm">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Имя" formControlName="name">
+        <mat-error *ngIf="form.get('contactForm').get('name')?.invalid">Введите имя</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Город" formControlName="city">
+        <mat-error *ngIf="form.get('contactForm').get('city')?.invalid">Введите город</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Телефон" formControlName="phone">
+        <mat-error *ngIf="form.get('contactForm').get('phone')?.invalid">Введите телефон</mat-error>
+      </mat-form-field>
+      <button mat-raised-button class="shopping-cart__submit" color="primary">Оформить заказ</button>
+    </mat-card>
+  </form>
 </div>
 
 <ng-template #emptyListTitle>

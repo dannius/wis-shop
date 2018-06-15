@@ -52,6 +52,11 @@ export class ProductDialogComponent implements OnInit {
   }
 
   public submit() {
+
+    if (this.ammountForm.invalid) {
+      return;
+    }
+
     // send to server
     this._shoppingCartService
     .getProductList()
