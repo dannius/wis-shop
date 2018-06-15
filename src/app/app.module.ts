@@ -1,3 +1,4 @@
+import { WishProductListResolver } from '@app/components/wish-cart/wish-product-list.resolver';
 import { ShoppingCartService } from '@app/services/shopping-cart.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -56,7 +57,8 @@ import { WishCartService } from '@app/services/wish-cart.service';
     WishCartService,
 
     // RESOLVERS
-    ProductListResolver
+    ProductListResolver,
+    WishProductListResolver
   ],
   entryComponents: [
     ProductDialogComponent,

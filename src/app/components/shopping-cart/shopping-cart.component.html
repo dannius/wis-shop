@@ -1,3 +1,9 @@
-<p>
-  shopping-cart works!
-</p>
+<div class="container" *ngIf="cartProducts?.length; else emptyListTitle">
+  <app-product-list [products]="cartProducts"></app-product-list>
+</div>
+
+<ng-template #emptyListTitle>
+  <div class="container">
+    <h1>В корзине ничего нет</h1>
+  </div>
+</ng-template>

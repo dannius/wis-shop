@@ -13,6 +13,10 @@ export class ProductItemComponent {
 
   @Input() product: Product;
 
+  private _snackbarConfig = {
+    duration: 2000,
+  };
+
   constructor(
     private _dialog: MatDialog,
     private _wishCartService: WishCartService,
@@ -36,19 +40,26 @@ export class ProductItemComponent {
     });
   }
 
-  public setAsWishes(id: number) {
-    const snackbarConfig = {
-      duration: 2000,
-    };
+  public removeFromWishes(id: number) {
+    this._wishCartService
+      .removeId(id)
+      .subscribe((status) => {
+        if (status) {
+          this._snackbar.open('Товар удален из списка желаний', '', this._snackbarConfig);
+          this.product.isWish = false;
+        }
+      });
+  }
 
+  public setAsWishes(id: number) {
     this._wishCartService
       .updateWithId(id)
       .subscribe((status) => {
         if (status) {
-          this._snackbar.open('Товар добавлен в список желаний', '', snackbarConfig);
+          this._snackbar.open('Товар добавлен в список желаний', '', this._snackbarConfig);
           this.product.isWish = true;
         } else {
-          this._snackbar.open('Не успел сделать удаление из списка желаний', '', snackbarConfig);
+          this._snackbar.open('Что-то пошло не так', '', this._snackbarConfig);
         }
       });
   }

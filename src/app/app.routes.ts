@@ -3,6 +3,7 @@ import { MainShopComponent } from '@app/components/main-shop/main-shop.component
 import { ProductListResolver } from '@app/components/main-shop/product-list.resolver';
 import { ShoppingCartComponent } from '@app/components/shopping-cart/shopping-cart.component';
 import { WishCartComponent } from '@app/components/wish-cart/wish-cart.component';
+import { WishProductListResolver } from '@app/components/wish-cart/wish-product-list.resolver';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
   },
   {
     path: 'wish-cart',
-    component: WishCartComponent
+    component: WishCartComponent,
+    resolve: { wishList: WishProductListResolver }
   }
 ];

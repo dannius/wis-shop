@@ -6,7 +6,7 @@
   <h3 class="product__title product__title_lg">{{product.title}}</h3>
   <h4 class="product__title product__title_md">{{product.price | price}} р.</h4>
   <mat-card-actions class="product__controls">
-    <button *ngIf="product.isWish; else alreadyWished" (click)="setAsWishes(product.id)" mat-icon-button color="warn">
+    <button *ngIf="product.isWish; else alreadyWished" (click)="removeFromWishes(product.id)" mat-icon-button color="warn">
       <mat-icon>bookmarks</mat-icon>
     </button>
     <ng-template #alreadyWished>

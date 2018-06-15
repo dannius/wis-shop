@@ -24,7 +24,8 @@ export class WishCartService implements OnInit {
 
   public fetch(): number[] {
     const ids = localStorage.getItem(this.WISHES);
-    return ids === null || ids === undefined ? [] : ids.split(',').map((id) => +id);
+    return ids === null || ids === undefined || ids === '' ?
+            [] : ids.split(',').map((id) => +id);
   }
 
   public write(ids: number[]) {
@@ -43,6 +44,15 @@ export class WishCartService implements OnInit {
       this._wishIds.next(draftIds);
       return Observable.of(true);
     }
+  }
+
+  public removeId(id: number): Observable<boolean> {
+    const draftIds = this.wishIds || [];
+    draftIds.splice(draftIds.indexOf(id), 1);
+
+    this.write(draftIds);
+    this._wishIds.next(draftIds);
+    return Observable.of(true);
   }
 
   public wishIdsObservable() {

@@ -23,15 +23,19 @@ export class HeaderComponent implements OnInit {
 
   public getWishTitle() {
     const count = this.wishIds.length.toString();
-    const ch = count.slice(-1);
+    // const ch = count.slice(-1);
 
-    if (ch === '0' && count.length === 1) {
-      return `нет избранных товаров`;
-    } else if (ch === '1') {
-      return `${count} избранный товар`;
-    } else {
-      return `${count} избранных товара`;
-    }
+    // if (ch === '0' && count.length === 1) {
+    //   return `нет избранных товаров`;
+    // } else if (ch === '1') {
+    //   return `${count} избранный товар`;
+    // } else if ('5' >= ch && ch <= '9' ) {
+    //   return `${count} избранных товаров`;
+    // } else {
+    //   return `${count} избранных товара`;
+    // }
+
+    return `избранных: ${count}`;
   }
 
 }
