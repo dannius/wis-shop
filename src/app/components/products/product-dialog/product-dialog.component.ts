@@ -1,3 +1,4 @@
+import { WishCartService } from '@app/services/wish-cart.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Product } from '@app/models';
@@ -14,6 +15,7 @@ export class ProductDialogComponent implements OnInit {
   public ammountForm: FormGroup;
   public totalPrice: number;
 
+  private _wishIds: number[];
   private _snackbarConfig = {
     duration: 2500
   };
@@ -23,7 +25,8 @@ export class ProductDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private _builder: FormBuilder,
     private _snackbar: MatSnackBar,
-    private _shoppingCartService: ShoppingCartService
+    private _shoppingCartService: ShoppingCartService,
+    private _wishCartService: WishCartService
   ) { }
 
   ngOnInit() {
@@ -40,6 +43,8 @@ export class ProductDialogComponent implements OnInit {
       .subscribe((num) => {
         this.totalPrice = num > 0 ? this.product.price * num : 0;
       });
+
+    this._wishIds = this._wishCartService.wishIds;
   }
 
   public closeModal() {
@@ -60,9 +65,15 @@ export class ProductDialogComponent implements OnInit {
       this._shoppingCartService.setProductList(products);
 
       this.closeModal();
+      this._removeFromWishIfExist();
       this._snackbar.open(`Товар "${this.product.title}" добавлен в корзину`, '', this._snackbarConfig);
     });
 
+  }
+
+  private _removeFromWishIfExist() {
+    this._wishCartService.removeId(this.product.id);
+    this.product.isWish = false;
   }
 
   private _updateCartProducts(products: Product[], ammountIfExist: number): Product[] {
