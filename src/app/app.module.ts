@@ -1,3 +1,4 @@
+import { ShoppingCartService } from '@app/services/shopping-cart.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -50,6 +51,7 @@ import { Base64ImagePipe, PricePipe } from '@app/shared/pipes';
   ],
   providers: [
     ProductService,
+    ShoppingCartService,
 
     // RESOLVERS
     ProductListResolver

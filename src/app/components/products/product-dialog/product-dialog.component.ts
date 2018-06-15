@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Product } from '@app/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ShoppingCartService } from '@app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -13,7 +14,7 @@ export class ProductDialogComponent implements OnInit {
   public ammountForm: FormGroup;
   public totalPrice: number;
 
-  private snackbarConfig = {
+  private _snackbarConfig = {
     duration: 2500
   };
 
@@ -21,7 +22,8 @@ export class ProductDialogComponent implements OnInit {
     private _dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private _builder: FormBuilder,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _shoppingCartService: ShoppingCartService
   ) { }
 
   ngOnInit() {
@@ -45,11 +47,33 @@ export class ProductDialogComponent implements OnInit {
   }
 
   public submit() {
-    this.closeModal();
-    this._snackbar.open(`Товар "${this.product.title}" добавлен в корзину`, '', this.snackbarConfig);
-
     // send to server
-    this.product.ammount = this.ammountForm.value;
+    this._shoppingCartService
+    .getProductList()
+    .take(1)
+    .subscribe((products: Product[]) => {
+      const existProduct = products.find((product) => product.id === this.product.id);
+      const ammountIfExist = existProduct ? existProduct.ammount : null;
+
+      this.product.ammount = this.ammountForm.value.ammount;
+      products = this._updateCartProducts(products, ammountIfExist);
+      this._shoppingCartService.setProductList(products);
+
+      this.closeModal();
+      this._snackbar.open(`Товар "${this.product.title}" добавлен в корзину`, '', this._snackbarConfig);
+    });
+
+  }
+
+  private _updateCartProducts(products: Product[], ammountIfExist: number): Product[] {
+    if (ammountIfExist) {
+      this.product.ammount = this.product.ammount + ammountIfExist;
+      products = products.map(product => product.id === this.product.id ? this.product : product);
+    } else {
+      products.push(this.product);
+    }
+
+    return products;
   }
 
 }

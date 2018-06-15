@@ -8,9 +8,9 @@ export class Product {
   constructor(row: any = {}) {
     this.id = +row.id || null;
     this.title = row.title || '';
-    this.price = row.price || null;
+    this.price = row.price || 0;
     this.image = row.image || '';
-    this.ammount = row.ammount || null;
+    this.ammount = row.ammount || 0;
   }
 }
 
